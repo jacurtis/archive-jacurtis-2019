@@ -3,13 +3,19 @@
     <div class="my-8">
       <ul class="flex flex-col w-full p-0">
         <li v-for="(post, key) in posts" :key="key" class="mb-6 w-full list-reset">
-          <div class="text-grey-dark font-bold text-sm tracking-wide">
-            <a v-for="tag in post.tags" :key="tag" :href="'/category/'+tag" class="ml-1 no-underline">
+          <div class="text-grey-dark font-bold text-sm tracking-wide flex justify-start flex-row items-center">
+            <span>
+              {{ post._created | toDate }}
+            </span>
+            <span class="mx-2">
+              |
+            </span>
+            <a v-for="tag in post.tags" :key="tag" :href="'/category/'+tag" class="mr-2 bg-blue text-white px-2 py-1 no-underline text-xs font-light rounded hover:shadow">
               {{ tag }}
             </a>
           </div>
 
-          <a :href="'/'+post.title_slug" class="no-underline">
+          <a :href="'/journal/'+post.title_slug" class="no-underline">
             <h2 class="my-2 text-grey-darkest text-lg lg:text-xl">
               {{ post.title }}
             </h2>

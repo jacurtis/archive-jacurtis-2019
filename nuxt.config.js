@@ -106,6 +106,45 @@ module.exports = {
     }
   },
 
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: process.env.URL,
+    cacheTime: 1000 * 60 * 15,
+    generate: true, // Enable me when using nuxt generate
+    async routes() {
+      const { data } = await axios.post(
+        process.env.POSTS_URL,
+        JSON.stringify({
+          filter: {
+            published: true
+          },
+          sort: {
+            _created: -1
+          },
+          populate: 1
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      const collection = collect(data.entries)
+
+      const tags = collection
+        .map(post => post.tags)
+        .flatten()
+        .unique()
+        .map(tag => `category/${tag}`)
+        .all()
+
+      const posts = collection.map(post => post.title_slug).all()
+
+      return posts.concat(tags)
+    }
+  },
+
   /*
   ** Build configuration
   */

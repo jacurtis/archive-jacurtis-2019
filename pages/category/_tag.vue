@@ -7,7 +7,7 @@
       <ul class="flex flex-col w-full p-0">
         <li v-for="(post, key) in posts" :key="key" class="mb-6 w-full list-reset">
           <div class="text-grey-dark font-bold text-sm tracking-wide">
-            <a v-for="(tag, key) in post.tags" :key="key" :href="'/category/'+tag" class="ml-1 no-underline">
+            <a v-for="(tag, tagkey) in post.tags" :key="tagkey" :href="'/category/'+tag" class="ml-1 no-underline">
               {{ tag }}
             </a>
           </div>
@@ -51,6 +51,18 @@ export default {
       }
 
       return { posts: data.entries, category: params.tag }
+    }
+  },
+  head() {
+    return {
+      title: `Posts tagged with ${this.category}`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `All journal posts categorized as ${this.category}.`
+        }
+      ]
     }
   }
 }

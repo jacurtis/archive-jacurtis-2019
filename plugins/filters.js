@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import highlightjs from 'highlight.js'
 import marked, { Renderer } from 'marked'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
+const dayjs = require('dayjs')
+dayjs.extend(advancedFormat)
 
 // Only import the languages that you need to keep our js bundle small
 highlightjs.registerLanguage('php', require('highlight.js/lib/languages/php'))
@@ -30,4 +33,8 @@ marked.setOptions({
 
 Vue.filter('parseMd', function(content) {
   return marked(content)
+})
+
+Vue.filter('toDate', function(timestamp) {
+  return dayjs(timestamp * 1000).format('Do MMM YY')
 })
