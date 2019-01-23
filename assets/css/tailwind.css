@@ -36,6 +36,22 @@
  * @import "components/forms";
  */
 
+.content {
+  width: 50rem;
+}
+
+.markdown p {
+  @apply mt-0 mb-6;
+}
+
+.markdown ul {
+  @apply mb-6;
+}
+
+pre {
+  @apply my-8;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

@@ -1,9 +1,15 @@
-const pkg = require('./package')
-require('dotenv').config()
 // const PurgecssPlugin = require('purgecss-webpack-plugin')
 // const glob = require('glob-all')
 // const path = require('path')
 // import axios from 'axios'
+require('dotenv').config()
+const pkg = require('./package')
+
+export default {
+  env: {
+    postsUrl: process.env.POSTS_URL
+  }
+}
 
 module.exports = {
   mode: 'spa',
@@ -42,7 +48,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
