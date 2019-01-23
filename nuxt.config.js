@@ -1,8 +1,9 @@
 // const PurgecssPlugin = require('purgecss-webpack-plugin')
 // const glob = require('glob-all')
 // const path = require('path')
-// import axios from 'axios'
+import axios from 'axios'
 require('dotenv').config()
+const collect = require('collect.js')
 const pkg = require('./package')
 
 export default {
@@ -35,12 +36,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css', 'highlight.js/styles/atom-one-dark.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: ['~/plugins/filters.js'],
 
   /*
   ** Nuxt.js modules
@@ -56,6 +57,53 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  generate: {
+    routes: async () => {
+      const { data } = await axios.post(
+        process.env.POSTS_URL,
+        JSON.stringify({
+          filter: { published: true },
+          sort: { _created: -1 },
+          populate: 1
+        }),
+        {
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+
+      const collection = collect(data.entries)
+
+      const tags = collection
+        .map(post => post.tags)
+        .flatten()
+        .unique()
+        .map(tag => {
+          const payload = collection
+            .filter(item => {
+              return collect(item.tags).contains(tag)
+            })
+            .all()
+
+          return {
+            route: `category/${tag}`,
+            payload: payload
+          }
+        })
+        .all()
+
+      const posts = collection
+        .map(post => {
+          return {
+            route: post.title_slug,
+            payload: post
+          }
+        })
+        .all()
+
+      return posts.concat(tags)
+    }
   },
 
   /*
