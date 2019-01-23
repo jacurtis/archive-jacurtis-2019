@@ -2,7 +2,10 @@
   <section>
     <div class="my-8">
       <p class="pb-4 leading-normal">
-        Hey, I'm <strong>J. Alexander Curtis</strong>!  Around the web you find me under the name <strong>Jacurtis</strong> and I run the DevMarketer website and YouTube channel for software-focused entrepreneurs.
+        Hey, I'm <strong>J. Alexander Curtis</strong>, but my friends and collegues call me Alex!
+      </p>
+      <p class="pb-4 leading-normal">
+        Around the web you can find me under the name <a href="https://twitter.com/_jacurtis">Jacurtis</a> and I run the <a href="https://devmarketer.io">DevMarketer website</a> and YouTube channel for software-focused entrepreneurs.
       </p>
       <p class="pb-4 leading-normal">
         Right now, I am focused on building DevMarketer into a thriving community focused on bringing smart marketing insights into the software products that we build everyday.
