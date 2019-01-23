@@ -1,15 +1,16 @@
 <template>
   <section>
     <article class="my-8">
+      <p class="text-grey-dark font-bold text-sm tracking-wide">Published {{ post._created | humanTime }} at {{ post._created | clock }}</p>
+      <h1 class="mt-2">
+        {{ post.title }}
+      </h1>
+      <div class="mt-4 markdown" v-html="$options.filters.parseMd(post.excerpt + '\n' + post.content)" />
       <div class="text-grey-dark font-bold text-sm tracking-wide">
         <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
           {{ tag }}
         </Tag>
       </div>
-      <h1 class="mt-2">
-        {{ post.title }}
-      </h1>
-      <div class="mt-4 markdown" v-html="$options.filters.parseMd(post.excerpt + '\n' + post.content)" />
     </article>
   </section>
 </template>

@@ -2,7 +2,9 @@ import Vue from 'vue'
 import highlightjs from 'highlight.js'
 import marked, { Renderer } from 'marked'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
+import relativeTime from 'dayjs/plugin/relativeTime'
 const dayjs = require('dayjs')
+dayjs.extend(relativeTime)
 dayjs.extend(advancedFormat)
 
 // Only import the languages that you need to keep our js bundle small
@@ -35,6 +37,14 @@ Vue.filter('parseMd', function(content) {
   return marked(content)
 })
 
-Vue.filter('toDate', function(timestamp) {
-  return dayjs(timestamp * 1000).format('Do MMM YY')
+Vue.filter('relativeTime', function(timestamp) {
+  return dayjs(timestamp * 1000).fromNow()
+})
+
+Vue.filter('humanTime', function(timestamp) {
+  return dayjs(timestamp * 1000).format('MMM Do, YYYY')
+})
+
+Vue.filter('clock', function(timestamp) {
+  return dayjs(timestamp * 1000).format('h:mm A')
 })

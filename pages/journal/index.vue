@@ -17,7 +17,7 @@
           <li v-for="(post, key) in posts" :key="key" class="mb-6 w-full list-reset">
             <div class="text-grey-dark font-bold text-sm tracking-wide flex justify-start flex-row items-center">
               <span>
-                {{ post._created | toDate }}
+                {{ post._created | relativeTime }}
               </span>
               <span class="mx-2">
                 |
