@@ -1,4 +1,9 @@
 const pkg = require('./package')
+require('dotenv').config()
+// const PurgecssPlugin = require('purgecss-webpack-plugin')
+// const glob = require('glob-all')
+// const path = require('path')
+// import axios from 'axios'
 
 module.exports = {
   mode: 'spa',
