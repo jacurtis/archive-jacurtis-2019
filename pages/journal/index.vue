@@ -1,9 +1,13 @@
 <template>
   <div>
     <section class="mt-8 mb-12">
-      <h1 class="text-4xl pb-3">My Journal</h1>
+      <h1 class="text-4xl pb-3">
+        My Journal
+      </h1>
       <p class="tracking-wide leading-normal text-grey-darker">
-        Taking inspiration from other developers and influencers around me, I have decided to create a space to make my thoughts and musings throughout the year of 2019.  These won't be tutorials usually, which can be found over at <a href="https://devmarketer.io">DevMarketer.io</a>, but instead quick thoughts or things I learned.
+        Taking inspiration from other developers and influencers around me, I have decided to create a space to make my thoughts and musings throughout the year of 2019.  These won't be tutorials usually, which can be found over at <a href="https://devmarketer.io">
+          DevMarketer.io
+        </a>, but instead quick thoughts or things I learned.
       </p>
       <hr>
     </section>
@@ -18,9 +22,9 @@
               <span class="mx-2">
                 |
               </span>
-              <a v-for="tag in post.tags" :key="tag" :href="'/category/'+tag" class="mr-2 bg-teal text-white px-2 py-1 no-underline text-xs font-light rounded hover:shadow">
+              <Tag v-for="tag in post.tags" :key="tag" :name="tag">
                 {{ tag }}
-              </a>
+              </Tag>
             </div>
   
             <a :href="'/journal/'+post.title_slug" class="no-underline">
@@ -41,6 +45,8 @@
 </template>
 
 <script>
+import Tag from '~/components/Tag.vue'
+
 export default {
   async asyncData({ app }) {
     const { data } = await app.$axios.post(
@@ -56,6 +62,9 @@ export default {
     )
 
     return { posts: data.entries }
+  },
+  components: {
+    Tag
   },
   data() {
     return {

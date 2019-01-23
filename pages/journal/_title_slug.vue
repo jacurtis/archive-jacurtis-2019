@@ -2,9 +2,9 @@
   <section>
     <article class="my-8">
       <div class="text-grey-dark font-bold text-sm tracking-wide">
-        <a v-for="(tag, key) in post.tags" :key="key" :href="'/category/'+tag" class="ml-1 no-underline">
+        <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
           {{ tag }}
-        </a>
+        </Tag>
       </div>
       <h1 class="mt-2">
         {{ post.title }}
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import Tag from '~/components/Tag.vue'
+
 export default {
   async asyncData({ app, params, error, payload }) {
     if (payload) {
@@ -38,6 +40,9 @@ export default {
 
       return { post: data.entries[0] }
     }
+  },
+  components: {
+    Tag
   },
   head() {
     return {
