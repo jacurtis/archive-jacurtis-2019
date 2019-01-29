@@ -25,25 +25,5 @@
 </template>
 
 <script>
-export default {
-  // async asyncData({ app }) {
-  //   const { data } = await app.$axios.post(
-  //     process.env.POSTS_URL,
-  //     JSON.stringify({
-  //       filter: { published: true },
-  //       sort: { published_on: -1 },
-  //       populate: -1
-  //     }),
-  //     {
-  //       headers: { 'Content-Type': 'application/json' }
-  //     }
-  //   )
-  //   return { posts: data.entries }
-  // },
-  // data() {
-  //   return {
-  //     url: process.env.POSTS_URL
-  //   }
-  // }
-}
+export default {}
 </script>

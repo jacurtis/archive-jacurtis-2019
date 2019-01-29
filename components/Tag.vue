@@ -1,6 +1,6 @@
 <template>
   <a :href="href" class="mr-2 bg-teal text-white px-2 py-1 no-underline text-xs font-light rounded hover:shadow">
-    <slot />
+    #<slot />
   </a>
 </template>
 
@@ -20,7 +20,7 @@ export default {
   computed: {
     href() {
       if (this.url === '' && this.name !== '') {
-        return `/category/${this.name}`
+        return `/topic/${this.name}`
       } else if (this.url === '' || this.url === '/') {
         return `/`
       } else {

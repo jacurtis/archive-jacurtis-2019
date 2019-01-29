@@ -28,8 +28,8 @@ export default {
       const { data } = await app.$axios.post(
         process.env.POSTS_URL,
         JSON.stringify({
-          filter: { published: true, title_slug: params.title_slug },
-          sort: { _created: -1 },
+          filter: { published: true, slug: params.slug },
+          sort: { published_on: -1 },
           populate: 1
         }),
         {
@@ -54,7 +54,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.post.title
+          content: this.post.meta_description
         }
       ]
     }

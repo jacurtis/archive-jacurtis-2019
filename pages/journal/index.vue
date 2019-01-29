@@ -17,7 +17,7 @@
           <li v-for="(post, key) in posts" :key="key" class="mb-6 w-full list-reset">
             <div class="text-grey-dark font-bold text-sm tracking-wide flex justify-start flex-row items-center">
               <span>
-                {{ post._created | relativeTime }}
+                {{ post.published_on | relativeTime }}
               </span>
               <span class="mx-2">
                 |
@@ -27,14 +27,14 @@
               </Tag>
             </div>
   
-            <a :href="'/journal/'+post.title_slug" class="no-underline">
+            <a :href="'/journal/'+post.slug" class="no-underline">
               <h2 class="my-2 text-grey-darkest text-lg lg:text-xl">
                 {{ post.title }}
               </h2>
             </a>
   
             <div class="page-content hidden md:block text-base mb-2" v-html="post.excerpt" />
-            <a class="text-sm text-blue-light no-underline" :href="'/journal/'+post.title_slug">
+            <a class="text-sm text-blue-light no-underline" :href="'/journal/'+post.slug">
               Read more
             </a>
           </li>
@@ -53,7 +53,7 @@ export default {
       process.env.POSTS_URL,
       JSON.stringify({
         filter: { published: true },
-        sort: { _created: -1 },
+        sort: { published_on: -1 },
         populate: 1
       }),
       {
@@ -66,9 +66,17 @@ export default {
   components: {
     Tag
   },
-  data() {
+  head() {
     return {
-      url: process.env.POSTS_URL
+      title: 'Journal Entries for Jacurtis',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'J. Alexander Curtis writes musings and thoughts about work and life in this online journal.'
+        }
+      ]
     }
   }
 }
