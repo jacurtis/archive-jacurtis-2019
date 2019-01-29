@@ -65,7 +65,7 @@ module.exports = {
         process.env.POSTS_URL,
         JSON.stringify({
           filter: { published: true },
-          sort: { _created: -1 },
+          sort: { published_on: -1 },
           populate: 1
         }),
         {
@@ -87,7 +87,7 @@ module.exports = {
             .all()
 
           return {
-            route: `category/${tag}`,
+            route: `topic/${tag}`,
             payload: payload
           }
         })
@@ -96,7 +96,7 @@ module.exports = {
       const posts = collection
         .map(post => {
           return {
-            route: post.title_slug,
+            route: `journal/${post.slug}`,
             payload: post
           }
         })
@@ -119,7 +119,7 @@ module.exports = {
             published: true
           },
           sort: {
-            _created: -1
+            published_on: -1
           },
           populate: 1
         }),
@@ -136,10 +136,10 @@ module.exports = {
         .map(post => post.tags)
         .flatten()
         .unique()
-        .map(tag => `category/${tag}`)
+        .map(tag => `topic/${tag}`)
         .all()
 
-      const posts = collection.map(post => post.title_slug).all()
+      const posts = collection.map(post => `journal/${post.slug}`).all()
 
       return posts.concat(tags)
     }

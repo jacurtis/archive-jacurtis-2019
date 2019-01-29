@@ -1,7 +1,9 @@
 <template>
   <section>
     <article class="my-8">
-      <p class="text-grey-dark font-bold text-sm tracking-wide">Published {{ post._created | humanTime }} at {{ post._created | clock }}</p>
+      <p class="text-grey-dark font-bold text-sm tracking-wide">
+        Published {{ post._created | humanTime }} at {{ post._created | clock }}
+      </p>
       <h1 class="mt-2">
         {{ post.title }}
       </h1>
