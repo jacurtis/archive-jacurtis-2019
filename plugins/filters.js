@@ -45,6 +45,6 @@ Vue.filter('humanTime', function(date) {
   return dayjs(date).format('MMM Do, YYYY')
 })
 
-Vue.filter('clock', function(date) {
-  return dayjs(date).format('h:mm A')
+Vue.filter('clock', function(timestamp) {
+  return dayjs(timestamp * 1000).format('h:mm A')
 })
