@@ -7,7 +7,10 @@
       <h1 class="mt-2">
         {{ post.title }}
       </h1>
-      <div class="mt-4 markdown" v-html="$options.filters.parseMd(post.excerpt + '\n' + post.content)" />
+      
+      <!-- Rendered Markdown -->
+      <Markdown class="mt-4 markdown" :content="post.content" />
+
       <div class="text-grey-dark font-bold text-sm tracking-wide">
         <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
           {{ tag }}
@@ -19,6 +22,7 @@
 
 <script>
 import Tag from '~/components/Tag.vue'
+import Markdown from '~/components/Markdown.vue'
 
 export default {
   async asyncData({ app, params, error, payload }) {
@@ -45,7 +49,8 @@ export default {
     }
   },
   components: {
-    Tag
+    Tag,
+    Markdown
   },
   head() {
     return {
