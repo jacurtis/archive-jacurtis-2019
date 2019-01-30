@@ -8,7 +8,8 @@ const pkg = require('./package')
 
 export default {
   env: {
-    postsUrl: process.env.POSTS_URL
+    // postsUrl: process.env.POSTS_URL,
+    // uploadsUrl: process.env.UPLOADS_URL
   }
 }
 

@@ -16,7 +16,7 @@
         </header>
 
         <figure class="post-image">
-          <img src="/img/welcome-to-ghost.jpg" alt="Post Image">
+          <img :src="featuredImageUrl" :alt="post.image.description">
         </figure>
         
         <section class="post-content content">
@@ -66,6 +66,11 @@ export default {
   components: {
     Tag,
     Markdown
+  },
+  computed: {
+    featuredImageUrl() {
+      return process.env.UPLOADS_URL + this.post.image.path
+    }
   },
   head() {
     return {
@@ -118,7 +123,7 @@ export default {
 
   img {
     width: 100%;
-    max-height: 800px;
+    max-height: 650px;
     object-fit: cover;
     vertical-align: middle;
   }
