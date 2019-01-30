@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row justify-center w-screen">
-    <div class="overflow-hidden content flex flex-col p-4 md:p-8">
+    <div class="flex flex-col p-4 md:p-8">
       <page-header />
       <page-nav />
       <nuxt />

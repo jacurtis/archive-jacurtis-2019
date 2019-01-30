@@ -1,0 +1,7 @@
+$font-monospace: courier-prime, monospace;
+
+@mixin monospace {
+  font-family: $font-monospace;
+  font-weight: 400 !important;
+  font-style: normal;
+}

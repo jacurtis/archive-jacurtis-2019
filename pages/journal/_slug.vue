@@ -1,22 +1,37 @@
 <template>
-  <section>
-    <article class="my-8">
-      <p class="text-grey-dark font-bold text-sm tracking-wide">
-        Published {{ post.published_on | humanTime }}
-      </p>
-      <h1 class="mt-2">
-        {{ post.title }}
-      </h1>
-      
-      <!-- Rendered Markdown -->
-      <Markdown class="mt-4 markdown" :content="post.content" />
+  <section class="post-section">
+    <div class="container">
+      <article class="my-8 post">
+        <header class="post-header">
+          <section class="post-meta">
+            <time class="post-meta-date" :datetime="post.published_on">
+              {{ post.published_on | humanTime }}
+            </time>
+            <!-- <span class="date-divider">/</span>
+            <a href="/tag/getting-started">Getting Started</a> -->
+          </section>
+          <h1 class="post-title">
+            {{ post.title }}
+          </h1>
+        </header>
 
-      <div class="text-grey-dark font-bold text-sm tracking-wide">
-        <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
-          {{ tag }}
-        </Tag>
-      </div>
-    </article>
+        <figure class="post-image">
+          <img src="/img/welcome-to-ghost.jpg" alt="Post Image">
+        </figure>
+        
+        <section class="post-content content">
+          <!-- Rendered Markdown -->
+          <Markdown class="mt-4 markdown" :content="post.content" />  
+        </section>
+        
+  
+        <div class="text-grey-dark font-bold text-sm tracking-wide">
+          <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
+            {{ tag }}
+          </Tag>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 
@@ -66,3 +81,76 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss" scoped>
+.post-header {
+  text-align: center;
+  padding: 6vw 3vw 3vw 3vw;
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #738a94;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    .post-meta-date {
+      color: #3eb0ef;
+    }
+  }
+  .post-title {
+    margin: 0;
+    padding-top: 10px;
+    color: #090a0b;
+    font-family: lexia, sans-serif;
+    font-size: 50px;
+    font-weight: 800;
+    font-style: normal;
+  }
+}
+.post-image {
+  margin: 0 -10vw -165px;
+  padding: 0;
+  background: #c5d2d9 50%;
+  border-radius: 5px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    max-height: 800px;
+    object-fit: cover;
+    vertical-align: middle;
+  }
+}
+
+.post-content {
+  position: relative;
+  border-radius: 5px 5px 0 0;
+  margin: 0 auto;
+  padding: 70px 100px 0;
+  min-height: 300px;
+  background: #fff;
+
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    z-index: -1;
+    display: block;
+    width: 20px;
+    height: 200px;
+    background: rgba(39, 44, 49, 0.15);
+    filter: blur(5px);
+  }
+  &:before {
+    left: -5px;
+    transform: rotate(-5deg);
+  }
+  &:after {
+    right: -5px;
+    transform: rotate(5deg);
+  }
+}
+</style>
