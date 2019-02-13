@@ -1,0 +1,82 @@
+$mobile: 768px !default;
+$tablet: 769px !default;
+$desktop: 1024px !default;
+$widescreen: 1216px !default;
+$fullhd: 1408px !default;
+
+// Mobile Devices Only
+@mixin mobile {
+  @media only screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+// Tablet Size and Up
+@mixin tablet {
+  @media only screen and (min-width: #{$tablet}) {
+    @content;
+  }
+}
+
+// Tablet Size Only
+@mixin tablet-only {
+  @media only screen and (min-width: #{$tablet}) and (max-width: #{$desktop - 1px}) {
+    @content;
+  }
+}
+
+// Mobile & Tablet
+@mixin touch {
+  @media only screen and (max-width: #{$desktop - 1px}) {
+    @content;
+  }
+}
+
+// Desktop Size and Up
+@mixin desktop {
+  @media screen and (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+// Desktop Size Only
+@mixin desktop-only {
+  @media only screen and (min-width: #{$desktop}) and (max-width: #{$widescreen - 1px}) {
+    @content;
+  }
+}
+
+// Widescreen Size and Up
+@mixin widescreen {
+  @media screen and (min-width: #{$widescreen}) {
+    @content;
+  }
+}
+
+// Widescreen Only
+@mixin widescreen-only {
+  @media only screen and (min-width: #{$widescreen}) and (max-width: #{$fullhd - 1px}) {
+    @content;
+  }
+}
+
+// Full HD Size Only
+@mixin fullhd {
+  @media only screen and (min-width: #{$fullhd}) {
+    @content;
+  }
+}
+
+// Everything below Widescreen
+@mixin until-widescreen {
+  @media only screen and (max-width: #{$widescreen - 1px}) {
+    @content;
+  }
+}
+
+// Everything Below Full HD
+@mixin until-fullhd {
+  @media only screen and (max-width: #{$fullhd - 1px}) {
+    @content;
+  }
+}

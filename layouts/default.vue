@@ -1,11 +1,9 @@
 <template>
-  <div class="flex flex-row justify-center w-screen">
-    <div class="flex flex-col p-4 md:p-8">
-      <page-header />
-      <page-nav />
-      <nuxt />
-      <page-footer />
-    </div>
+  <div class="site-wrapper">
+    <page-header />
+    <page-nav />
+    <nuxt />
+    <page-footer />
   </div>
 </template>
 

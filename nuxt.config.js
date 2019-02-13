@@ -44,7 +44,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/css/tailwind.css',
+    // '~/assets/css/tailwind.css',
     'highlight.js/styles/atom-one-dark.css',
     '~/assets/scss/styles.scss'
   ],

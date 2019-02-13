@@ -1,0 +1,42 @@
+$container-mobile: 88% !default;
+$container-tablet: 90% !default;
+$container-desktop: 960px !default;
+$container-widescreen: 1152px !default;
+$container-fullhd: 1344px !default;
+
+$gap: 32px !default;
+
+.container {
+  width: $container-mobile;
+  margin-left: auto;
+  margin-right: auto;
+  @include tablet-only {
+    width: $container-tablet;
+    max-width: $container-widescreen;
+  }
+  @include desktop-only {
+    width: $container-desktop;
+    max-width: $container-widescreen;
+  }
+  @include widescreen-only {
+    width: $container-widescreen;
+    max-width: $container-widescreen;
+  }
+  @include fullhd {
+    width: $container-fullhd;
+    max-width: $container-fullhd;
+  }
+}
+
+.container-fluid {
+  width: auto;
+  margin-left: $gap;
+  margin-right: $gap;
+  max-width: none;
+}
+
+.inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  width: 100%;
+}

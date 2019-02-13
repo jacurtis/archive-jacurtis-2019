@@ -1,37 +1,37 @@
 <template>
   <section class="post-section">
-    <div class="container">
-      <article class="my-8 post">
-        <header class="post-header">
-          <section class="post-meta">
-            <time class="post-meta-date" :datetime="post.published_on">
-              {{ post.published_on | humanTime }}
-            </time>
-            <!-- <span class="date-divider">/</span>
+    <!-- <div class="container"> -->
+    <article class="post inner">
+      <header class="post-header">
+        <section class="post-meta">
+          <time class="post-meta-date" :datetime="post.published_on">
+            {{ post.published_on | humanTime }}
+          </time>
+          <!-- <span class="date-divider">/</span>
             <a href="/tag/getting-started">Getting Started</a> -->
-          </section>
-          <h1 class="post-title">
-            {{ post.title }}
-          </h1>
-        </header>
-
-        <figure class="post-image">
-          <img :src="featuredImageUrl" :alt="post.image.description">
-        </figure>
-        
-        <section class="post-content content">
-          <!-- Rendered Markdown -->
-          <Markdown class="mt-4 markdown" :content="post.content" />  
         </section>
+        <h1 class="post-title">
+          {{ post.title }}
+        </h1>
+      </header>
+
+      <figure class="post-image" :style="deviceWidthCss">
+        <img :src="featuredImageUrl" :alt="post.image.description">
+      </figure>
+        
+      <section class="post-content content">
+        <!-- Rendered Markdown -->
+        <Markdown class="mt-4 markdown" :content="post.content" />  
+      </section>
         
   
-        <div class="text-grey-dark font-bold text-sm tracking-wide">
-          <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
-            {{ tag }}
-          </Tag>
-        </div>
-      </article>
-    </div>
+      <div class="text-grey-dark font-bold text-sm tracking-wide">
+        <Tag v-for="(tag, key) in post.tags" :key="key" :name="tag">
+          {{ tag }}
+        </Tag>
+      </div>
+    </article>
+    <!-- </div> -->
   </section>
 </template>
 
@@ -70,6 +70,14 @@ export default {
   computed: {
     featuredImageUrl() {
       return process.env.UPLOADS_URL + this.post.image.path
+    },
+    deviceWidth() {
+      return window.innerWidth > 0 ? window.innerWidth : screen.width
+    },
+    deviceWidthCss() {
+      return {
+        maxWidth: this.deviceWidth
+      }
     }
   },
   head() {
@@ -89,6 +97,14 @@ export default {
 
 
 <style lang="scss" scoped>
+@import '~/assets/scss/_variables.scss';
+@import '~/assets/scss/mixins/_media-queries.scss';
+.post-section {
+  padding-bottom: 4vw;
+  background: #fff;
+  position: relative;
+  padding: 0 4vw 4vw 4vw;
+}
 .post-header {
   text-align: center;
   padding: 6vw 3vw 3vw 3vw;
@@ -115,11 +131,20 @@ export default {
   }
 }
 .post-image {
-  margin: 0 -10vw -165px;
+  margin: 0 -4vw -76px;
   padding: 0;
   background: #c5d2d9 50%;
   border-radius: 5px;
   overflow: hidden;
+  @include tablet-only {
+    margin: 0 -4vw -120px;
+  }
+  @include desktop {
+    margin: 0 -4vw -165px;
+  }
+  @media screen and (min-width: 1316px) {
+    margin: 0 -10vw -165px;
+  }
 
   img {
     width: 100%;
@@ -136,6 +161,13 @@ export default {
   padding: 70px 100px 0;
   min-height: 300px;
   background: #fff;
+
+  @include tablet-only {
+    padding: 26px 60px 0;
+  }
+  @include mobile {
+    padding: 26px 24px 0;
+  }
 
   &:after,
   &:before {
